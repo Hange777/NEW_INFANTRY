@@ -39,6 +39,7 @@ new_infantry\chassis_behaviour.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_
 new_infantry\chassis_behaviour.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
 new_infantry\chassis_behaviour.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 new_infantry\chassis_behaviour.o: ..\SYSTEM\parameter.h
+new_infantry\chassis_behaviour.o: ..\ACE-ECF\Algorithm\inc\struct_typedef.h
 new_infantry\chassis_behaviour.o: D:\keil\core\ARM\ARMCC\Bin\..\include\stdlib.h
 new_infantry\chassis_behaviour.o: D:\keil\core\ARM\ARMCC\Bin\..\include\stdio.h
 new_infantry\chassis_behaviour.o: D:\keil\core\ARM\ARMCC\Bin\..\include\string.h
@@ -59,4 +60,10 @@ new_infantry\chassis_behaviour.o: ../Middlewares/Third_Party/FreeRTOS/Source/inc
 new_infantry\chassis_behaviour.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 new_infantry\chassis_behaviour.o: ..\BSP\rc.h
 new_infantry\chassis_behaviour.o: ../Core/Inc/usart.h
+new_infantry\chassis_behaviour.o: ..\ACE-ECF\Algorithm\inc\pid.h
+new_infantry\chassis_behaviour.o: ..\ACE-ECF\Algorithm\inc\filter.h
+new_infantry\chassis_behaviour.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
+new_infantry\chassis_behaviour.o: ../Drivers/CMSIS/Include/core_cm4.h
+new_infantry\chassis_behaviour.o: D:\keil\core\ARM\ARMCC\Bin\..\include\math.h
 new_infantry\chassis_behaviour.o: ..\TASK\chassis_task.h
+new_infantry\chassis_behaviour.o: ..\ACE-ECF\Algorithm\inc\maths.h

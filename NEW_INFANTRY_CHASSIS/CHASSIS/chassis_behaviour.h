@@ -1,20 +1,13 @@
 #ifndef __CHASSIS_BEHAVIOUR_H
 #define __CHASSIS_BEHAVIOUR_H
 
-
 #include "struct_variables.h"
-#include "chassis_task.h"
 
+void chassis_behaviour_react(chassis_control_t *Chassis_behaviour_react_f);
+void chassis_behaviour_choose(chassis_control_t *Chassis_behaviour_f);
+void chassis_motion_decomposition(chassis_control_t *chassis_motion_decomposition_f);
 
-typedef enum
-{
-	CHASSIS_ZERO_FORCE = 0, //底盘无力
-	
-	CHASSIS_FOLLOW,     //跟随
-    CHASSIS_NO_FOLLOW,  //不跟随
-    CHASSIS_TWIST_WAIST, //扭腰
-    CHASSIS_ROTATION,    //小陀螺
-	CHASSIS_BATTERY,     //炮台模式
-} chassis_behaviour_e;
+chassis_behaviour_e *get_chassis_behaviour_point(void);
+infantry_state_e *get_chassis_state_point(void);
 
 #endif

@@ -39,6 +39,7 @@ new_infantry\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_p
 new_infantry\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
 new_infantry\chassis_task.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 new_infantry\chassis_task.o: ..\SYSTEM\parameter.h
+new_infantry\chassis_task.o: ..\ACE-ECF\Algorithm\inc\struct_typedef.h
 new_infantry\chassis_task.o: D:\keil\core\ARM\ARMCC\Bin\..\include\stdlib.h
 new_infantry\chassis_task.o: D:\keil\core\ARM\ARMCC\Bin\..\include\stdio.h
 new_infantry\chassis_task.o: D:\keil\core\ARM\ARMCC\Bin\..\include\string.h
@@ -59,7 +60,11 @@ new_infantry\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/
 new_infantry\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 new_infantry\chassis_task.o: ..\BSP\rc.h
 new_infantry\chassis_task.o: ../Core/Inc/usart.h
-new_infantry\chassis_task.o: ..\CHASSIS\chassis_app.h
-new_infantry\chassis_task.o: ../Middlewares/Third_Party/FreeRTOS/Source/CMSIS_RTOS/cmsis_os.h
+new_infantry\chassis_task.o: ..\ACE-ECF\Algorithm\inc\pid.h
+new_infantry\chassis_task.o: ..\ACE-ECF\Algorithm\inc\filter.h
+new_infantry\chassis_task.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
+new_infantry\chassis_task.o: ../Drivers/CMSIS/Include/core_cm4.h
+new_infantry\chassis_task.o: D:\keil\core\ARM\ARMCC\Bin\..\include\math.h
+new_infantry\chassis_task.o: ..\CHASSIS\chassis_behaviour.h
 new_infantry\chassis_task.o: ..\COMMUNICATION\can1_receive.h
 new_infantry\chassis_task.o: ../Core/Inc/can.h

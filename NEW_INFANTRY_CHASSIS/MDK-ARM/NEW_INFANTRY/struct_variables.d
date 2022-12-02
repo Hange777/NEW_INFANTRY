@@ -38,6 +38,7 @@ new_infantry\struct_variables.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_h
 new_infantry\struct_variables.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_ll_usb.h
 new_infantry\struct_variables.o: ../Drivers/STM32F4xx_HAL_Driver/Inc/stm32f4xx_hal_pcd_ex.h
 new_infantry\struct_variables.o: ..\SYSTEM\parameter.h
+new_infantry\struct_variables.o: ..\ACE-ECF\Algorithm\inc\struct_typedef.h
 new_infantry\struct_variables.o: D:\keil\core\ARM\ARMCC\Bin\..\include\stdlib.h
 new_infantry\struct_variables.o: D:\keil\core\ARM\ARMCC\Bin\..\include\stdio.h
 new_infantry\struct_variables.o: D:\keil\core\ARM\ARMCC\Bin\..\include\string.h
@@ -58,6 +59,11 @@ new_infantry\struct_variables.o: ../Middlewares/Third_Party/FreeRTOS/Source/incl
 new_infantry\struct_variables.o: ../Middlewares/Third_Party/FreeRTOS/Source/include/event_groups.h
 new_infantry\struct_variables.o: ..\BSP\rc.h
 new_infantry\struct_variables.o: ../Core/Inc/usart.h
+new_infantry\struct_variables.o: ..\ACE-ECF\Algorithm\inc\pid.h
+new_infantry\struct_variables.o: ..\ACE-ECF\Algorithm\inc\filter.h
+new_infantry\struct_variables.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
+new_infantry\struct_variables.o: ../Drivers/CMSIS/Include/core_cm4.h
+new_infantry\struct_variables.o: D:\keil\core\ARM\ARMCC\Bin\..\include\math.h
 new_infantry\struct_variables.o: ..\COMMUNICATION\can1_receive.h
 new_infantry\struct_variables.o: ../Core/Inc/can.h
 new_infantry\struct_variables.o: ..\COMMUNICATION\can2_receive.h

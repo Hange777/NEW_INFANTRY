@@ -13,8 +13,8 @@
   *****************************东莞理工学院ACE实验室 *****************************
 	*/
 
-#ifndef __INIT_TASK_H  //如果未定义
-#define __INIT_TASK_H  //那么定义
+#ifndef __INIT_TASK_H  
+#define __INIT_TASK_H  
 
 void Init_Task(void const * argument);
 

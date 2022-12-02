@@ -82,10 +82,6 @@ typedef struct //遥控统一结构体
             uint16_t B : 1;
         } bit;
     } kb;
-//	__packed struct
-//	{
-//		uint16_t v;
-//	} key;
 
 }RC_ctrl_t;
 
