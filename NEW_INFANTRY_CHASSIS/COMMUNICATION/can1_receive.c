@@ -1,7 +1,7 @@
 #include "can1_receive.h"
 #include "can2_receive.h"
 #include "struct_variables.h"
-
+#include "bsp_Motor_Encoder.h"
 extern CAN_HandleTypeDef hcan1;
 extern CAN_HandleTypeDef hcan2;
 
@@ -99,24 +99,28 @@ void chassis_can1_callback(CAN_HandleTypeDef *hcan)
 		{
 			motor_chassis[0].position = (uint16_t)(Rx_Data[0] << 8) | Rx_Data[1];
 			motor_chassis[0].speed = (uint16_t)(Rx_Data[2] << 8) | Rx_Data[3];
+			CAN_DATA_Encoder_Deal(motor_chassis[0].position, motor_chassis[0].speed, 1);
 			break;
 		}
 		case 0x202:
 		{
 			motor_chassis[1].position = (uint16_t)(Rx_Data[0] << 8) | Rx_Data[1];
 			motor_chassis[1].speed = (uint16_t)(Rx_Data[2] << 8) | Rx_Data[3];
+			CAN_DATA_Encoder_Deal(motor_chassis[1].position, motor_chassis[1].speed, 2);
 			break;
 		}
 		case 0x203:
 		{
 			motor_chassis[2].position = (uint16_t)(Rx_Data[0] << 8) | Rx_Data[1];
 			motor_chassis[2].speed = (uint16_t)(Rx_Data[2] << 8) | Rx_Data[3];
+			CAN_DATA_Encoder_Deal(motor_chassis[2].position, motor_chassis[2].speed, 3);
 			break;
 		}
 		case 0x204:
 		{
 			motor_chassis[3].position = (uint16_t)(Rx_Data[0] << 8) | Rx_Data[1];
 			motor_chassis[3].speed = (uint16_t)(Rx_Data[2] << 8) | Rx_Data[3];
+			CAN_DATA_Encoder_Deal(motor_chassis[3].position, motor_chassis[3].speed, 4);
 			break;
 		}
 		case 0x211: //超级电容接收

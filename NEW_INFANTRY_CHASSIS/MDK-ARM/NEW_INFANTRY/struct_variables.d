@@ -64,6 +64,7 @@ new_infantry\struct_variables.o: ..\ACE-ECF\Algorithm\inc\filter.h
 new_infantry\struct_variables.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
 new_infantry\struct_variables.o: ../Drivers/CMSIS/Include/core_cm4.h
 new_infantry\struct_variables.o: D:\keil\core\ARM\ARMCC\Bin\..\include\math.h
+new_infantry\struct_variables.o: ..\ACE-ECF\Bsp\Inc\bsp_Motor_Encoder.h
 new_infantry\struct_variables.o: ..\COMMUNICATION\can1_receive.h
 new_infantry\struct_variables.o: ../Core/Inc/can.h
 new_infantry\struct_variables.o: ..\COMMUNICATION\can2_receive.h

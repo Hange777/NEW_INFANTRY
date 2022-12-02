@@ -68,6 +68,7 @@ new_infantry\init_task.o: ..\ACE-ECF\Algorithm\inc\filter.h
 new_infantry\init_task.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
 new_infantry\init_task.o: ../Drivers/CMSIS/Include/core_cm4.h
 new_infantry\init_task.o: D:\keil\core\ARM\ARMCC\Bin\..\include\math.h
+new_infantry\init_task.o: ..\ACE-ECF\Bsp\Inc\bsp_Motor_Encoder.h
 new_infantry\init_task.o: ..\COMMUNICATION\can2_receive.h
 new_infantry\init_task.o: ..\TASK\Task_Safe.h
 new_infantry\init_task.o: ..\TASK\chassis_task.h

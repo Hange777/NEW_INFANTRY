@@ -65,6 +65,9 @@ new_infantry\chassis_task.o: ..\ACE-ECF\Algorithm\inc\filter.h
 new_infantry\chassis_task.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
 new_infantry\chassis_task.o: ../Drivers/CMSIS/Include/core_cm4.h
 new_infantry\chassis_task.o: D:\keil\core\ARM\ARMCC\Bin\..\include\math.h
+new_infantry\chassis_task.o: ..\ACE-ECF\Bsp\Inc\bsp_Motor_Encoder.h
 new_infantry\chassis_task.o: ..\CHASSIS\chassis_behaviour.h
 new_infantry\chassis_task.o: ..\COMMUNICATION\can1_receive.h
 new_infantry\chassis_task.o: ../Core/Inc/can.h
+new_infantry\chassis_task.o: ..\COMMUNICATION\can1_send.h
+new_infantry\chassis_task.o: ..\ACE-ECF\Algorithm\inc\maths.h

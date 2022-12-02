@@ -38,21 +38,22 @@
 //#include "crc.h"
 //#include "referee_deal.h"
 
+#include "bsp_Motor_Encoder.h"
+
 typedef enum
 {
-	CHASSIS_ZERO_FORCE = 0, //底盘无力
-	CHASSIS_FOLLOW,			//跟随
-	CHASSIS_NO_FOLLOW,		//不跟随
-	CHASSIS_ROTATION,		//小陀螺
-	CHASSIS_BATTERY,		//炮台模式
+	CHASSIS_FOLLOW,	   //跟随
+	CHASSIS_NO_FOLLOW, //不跟随
+	CHASSIS_ROTATION,  //小陀螺
+	CHASSIS_BATTERY,   //炮台模式
 } chassis_behaviour_e;
 
 typedef enum
 {
-	INF_STOP = 0, //停止
-	INF_RC,		  //遥控器
-	INF_MK,		  //键盘
-} infantry_state_e;
+	CHASSIS_ZERO_FORCE,	   //底盘无力
+	CHASSIS_LOCK_POSITION, //底盘位置锁死
+	CHASSIS_SPEED,		   //速度
+} chassis_state_e;
 
 // rm电机统一数据结构体
 typedef struct
@@ -74,7 +75,8 @@ typedef struct
 {
 	motor_measure_t *chassis_motor_measure; //接收电机的数据
 	fp32 Speed_Set;							//设置速度
-	int16_t give_current;					// pid输出
+	fp32 pid_output;						// pid输出
+	int16_t give_current;
 } Motor3508_t;
 
 typedef struct
@@ -82,19 +84,19 @@ typedef struct
 	RC_ctrl_t *Chassis_RC; //底盘遥控数据
 
 	chassis_behaviour_e *behaviour; //底盘模式
-	infantry_state_e *state;		//键鼠状态
+	chassis_state_e chassis_state;
 
-	Motor3508_t Chassis_Motor[4];		  //底盘四个电机
-	pid_parameter_t Chassis_Speed_Pid[4]; //正常移动的pid
-	pid_parameter_t Chassis_Location_Pid; //底盘位置环pid
-	pid_parameter_t chassis_rotate_pid;	  //旋转pid
+	Motor3508_t Chassis_Motor[4]; //底盘四个电机
+	Encoder_t *Motor_encoder[4];
+	pid_parameter_t motor_Speed_Pid[4]; //电机速度pid
+	pid_parameter_t motor_Position_Pid[4];
+
+	pid_parameter_t Chassis_speedX_Pid; //底盘速度xpid
+	pid_parameter_t Chassis_speedY_Pid; //底盘速度ypid
+	pid_parameter_t chassis_rotate_pid; //旋转pid
 
 	first_order_filter_type_t LowFilt_chassis_vx; //低通滤波器
 	first_order_filter_type_t LowFilt_chassis_vy; //低通滤波器
-
-	fp32 Chassis_Speed_X_Set; //底盘x方向的速度
-	fp32 Chassis_Speed_Y_Set; //底盘y方向的速度
-	fp32 Chassis_Speed_Z_Set; //底盘z方向的速度  旋转
 
 	fp32 Chassis_Gimbal_Diference_Angle; //底盘与云台的差角
 

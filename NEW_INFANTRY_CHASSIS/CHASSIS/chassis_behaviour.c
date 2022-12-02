@@ -4,11 +4,12 @@
 #include "maths.h"
 
 chassis_behaviour_e Chassis_Behaviour;
-infantry_state_e infantry_state;
 float Chassis_x = 0.0f;
 float Chassis_y = 0.0f;
 float Chassis_yaw = 0.0f;
-
+float Chassis_x_pid_output = 0.0f;
+float Chassis_y_pid_output = 0.0f;
+float Chassis_yaw_pid_output = 0.0f;
 /********************函数声明********************/
 void f_CHASSIS_FOLLOW(chassis_control_t *Chassis_behaviour_react_f);
 void f_CHASSIS_NO_FOLLOW(chassis_control_t *Chassis_behaviour_react_f);
@@ -97,21 +98,54 @@ void chassis_behaviour_react(chassis_control_t *Chassis_behaviour_react_f)
     default:
         break;
     }
+
+    //没头的时候旋转用的
+    Chassis_yaw += Chassis_behaviour_react_f->Chassis_RC->rc.ch[2];
+}
+void chassis_state_choose(chassis_control_t *chassis_state_choose_f)
+{
+    chassis_state_e last_state;
+    last_state = chassis_state_choose_f->chassis_state;
+    //如果没有控制量，锁死底盘
+    if (((Chassis_x < 5) && (Chassis_x > -5)) && ((Chassis_y < 5) && (Chassis_y > -5)) && ((Chassis_yaw < 5) && (Chassis_yaw > -5)))
+    {
+        chassis_state_choose_f->chassis_state = CHASSIS_LOCK_POSITION;
+    }
+    else
+    {
+        chassis_state_choose_f->chassis_state = CHASSIS_SPEED;
+    }
+    if (last_state != chassis_state_choose_f->chassis_state)
+    {
+        EncoderValZero(chassis_state_choose_f->Motor_encoder[0]);
+        EncoderValZero(chassis_state_choose_f->Motor_encoder[1]);
+        EncoderValZero(chassis_state_choose_f->Motor_encoder[2]);
+        EncoderValZero(chassis_state_choose_f->Motor_encoder[3]);
+    }
+
+    if (chassis_state_choose_f->Chassis_RC->rc.s[1] == RC_SW_DOWN)
+    {
+        chassis_state_choose_f->chassis_state = CHASSIS_ZERO_FORCE;
+    }
+}
+void chassis_speed_pid_calculate(chassis_control_t *chassis_speed_pid_calculate_f)
+{
+    Chassis_x_pid_output = -PidCalculate(&chassis_speed_pid_calculate_f->Chassis_speedX_Pid, Chassis_x, 0);
+    Chassis_y_pid_output = PidCalculate(&chassis_speed_pid_calculate_f->Chassis_speedY_Pid, Chassis_y, 0);
+    Chassis_yaw_pid_output = PidCalculate(&chassis_speed_pid_calculate_f->chassis_rotate_pid, Chassis_yaw, 0);
 }
 
 void chassis_motion_decomposition(chassis_control_t *chassis_motion_decomposition_f)
 {
-    chassis_motion_decomposition_f->Chassis_Motor[0].Speed_Set = (-Chassis_y - Chassis_x + Chassis_yaw) * chassis_motion_decomposition_f->chassis_speed_gain;
-    chassis_motion_decomposition_f->Chassis_Motor[1].Speed_Set = (Chassis_y - Chassis_x + Chassis_yaw) * chassis_motion_decomposition_f->chassis_speed_gain;
-    chassis_motion_decomposition_f->Chassis_Motor[2].Speed_Set = (-Chassis_y + Chassis_x + Chassis_yaw) * chassis_motion_decomposition_f->chassis_speed_gain;
-    chassis_motion_decomposition_f->Chassis_Motor[3].Speed_Set = (Chassis_y + Chassis_x + Chassis_yaw) * chassis_motion_decomposition_f->chassis_speed_gain;
+    chassis_motion_decomposition_f->Chassis_Motor[0].Speed_Set = (-Chassis_y_pid_output - Chassis_x_pid_output + Chassis_yaw_pid_output) * chassis_motion_decomposition_f->chassis_speed_gain;
+    chassis_motion_decomposition_f->Chassis_Motor[1].Speed_Set = (Chassis_y_pid_output - Chassis_x_pid_output + Chassis_yaw_pid_output) * chassis_motion_decomposition_f->chassis_speed_gain;
+    chassis_motion_decomposition_f->Chassis_Motor[2].Speed_Set = (-Chassis_y_pid_output + Chassis_x_pid_output + Chassis_yaw_pid_output) * chassis_motion_decomposition_f->chassis_speed_gain;
+    chassis_motion_decomposition_f->Chassis_Motor[3].Speed_Set = (Chassis_y_pid_output + Chassis_x_pid_output + Chassis_yaw_pid_output) * chassis_motion_decomposition_f->chassis_speed_gain;
 }
 
 void f_CHASSIS_FOLLOW(chassis_control_t *CHASSIS_FOLLOW_f)
 {
     Chassis_yaw = CHASSIS_FOLLOW_f->Chassis_Gimbal_Diference_Angle;
-    // //将现在的值视为0 different_angel视为目标
-    // PidCalculate(&CHASSIS_FOLLOW_f->chassis_rotate_pid, Chassis_yaw, 0);
 }
 
 void f_CHASSIS_NO_FOLLOW(chassis_control_t *Chassis_behaviour_react_f)
@@ -122,6 +156,7 @@ void f_CHASSIS_NO_FOLLOW(chassis_control_t *Chassis_behaviour_react_f)
     //将云台速度分解到底盘
     Chassis_x = Gimbal_y * sin_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle) - Gimbal_x * cos_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle);
     Chassis_y = Gimbal_y * cos_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle) + Gimbal_x * sin_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle);
+    Chassis_x = -Chassis_x;
     Chassis_yaw = 0;
 }
 void f_CHASSIS_ROTATION(chassis_control_t *Chassis_behaviour_react_f)
@@ -131,8 +166,9 @@ void f_CHASSIS_ROTATION(chassis_control_t *Chassis_behaviour_react_f)
     float Gimbal_x = Chassis_x;
     float Gimbal_y = Chassis_y;
     //将云台速度分解到底盘
-    Chassis_x = Gimbal_y * sin_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle) + Gimbal_x * cos_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle);
+    Chassis_x = Gimbal_y * sin_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle) - Gimbal_x * cos_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle);
     Chassis_y = Gimbal_y * cos_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle) + Gimbal_x * sin_calculate(Chassis_behaviour_react_f->Chassis_Gimbal_Diference_Angle);
+    Chassis_x = -Chassis_x;
 }
 void f_CHASSIS_BATTERY(chassis_control_t *Chassis_behaviour_react_f)
 {
@@ -148,13 +184,4 @@ void f_CHASSIS_BATTERY(chassis_control_t *Chassis_behaviour_react_f)
 chassis_behaviour_e *get_chassis_behaviour_point(void)
 {
     return (&Chassis_Behaviour);
-}
-/**
- * @brief          返回步兵状态指针
- * @param[in]      none
- * @retval
- */
-infantry_state_e *get_chassis_state_point(void)
-{
-    return (&infantry_state);
 }

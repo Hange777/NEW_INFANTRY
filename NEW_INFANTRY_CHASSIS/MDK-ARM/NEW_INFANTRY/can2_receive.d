@@ -67,3 +67,4 @@ new_infantry\can2_receive.o: ..\ACE-ECF\Algorithm\inc\filter.h
 new_infantry\can2_receive.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
 new_infantry\can2_receive.o: ../Drivers/CMSIS/Include/core_cm4.h
 new_infantry\can2_receive.o: D:\keil\core\ARM\ARMCC\Bin\..\include\math.h
+new_infantry\can2_receive.o: ..\ACE-ECF\Bsp\Inc\bsp_Motor_Encoder.h

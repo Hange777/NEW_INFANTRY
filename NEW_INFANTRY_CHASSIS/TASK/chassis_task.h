@@ -30,8 +30,8 @@
 #define CHASSIS_LB_MOTOR_KI 0.0f
 #define CHASSIS_LB_MOTOR_KD 0.5f
 
-//位置环pid
-#define CHASSIS_LOCATION_KP 100.0f
+//底盘速度pid
+#define CHASSIS_LOCATION_KP 8.0f
 #define CHASSIS_LOCATION_KI 0.0f
 #define CHASSIS_LOCATION_KD 10.8f
 
@@ -48,6 +48,7 @@
 #define CHASSIS_MK_SECOND_FILTERING (0.8f)
 
 /**********************运动加速度限制**********************/
+
 #define STRAIGHT_ACCELERAD 3.5f    //直行底盘加速度限制
 #define TRANSLATION_ACCELERAD 5.5f //平移底盘加速度限制
 #define ROTATING_ACCELERAD 19.0f   //旋转底盘加速度限制
@@ -60,12 +61,7 @@
 #define CHASSIS_ROTATION_MOVE_SPEED (800 * 0.8f) //小陀螺移动时为防止轨迹失真减转速   1700
 #define CHASSIS_TWIST_SPEED 600                  //扭腰速度  1600
 
-#define NORMAL_FORWARD_BACK_SPEED 660.0f //键盘普通直行速度
-#define NORMAL_LEFT_RIGHT_SPEED 660.0f   //键盘普通平移速度
-
-#define HIGH_FORWARD_BACK_SPEED 750.0f //键盘加速直行速度  600.0f
-#define HIGH_LEFT_RIGHT_SPEED 750.0f   //键盘加速平移速度
-
+#define MOTOR_3508_CURRENT_LIMIT 15000
 void Task_Chassis(void const *argument);
 
 #endif

@@ -65,5 +65,6 @@ new_infantry\chassis_behaviour.o: ..\ACE-ECF\Algorithm\inc\filter.h
 new_infantry\chassis_behaviour.o: ../Middlewares/ST/ARM/DSP/Inc/arm_math.h
 new_infantry\chassis_behaviour.o: ../Drivers/CMSIS/Include/core_cm4.h
 new_infantry\chassis_behaviour.o: D:\keil\core\ARM\ARMCC\Bin\..\include\math.h
+new_infantry\chassis_behaviour.o: ..\ACE-ECF\Bsp\Inc\bsp_Motor_Encoder.h
 new_infantry\chassis_behaviour.o: ..\TASK\chassis_task.h
 new_infantry\chassis_behaviour.o: ..\ACE-ECF\Algorithm\inc\maths.h

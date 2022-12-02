@@ -10,6 +10,9 @@
         "pid.h": "c",
         "string.h": "c",
         "freertos.h": "c",
-        "rc.h": "c"
+        "rc.h": "c",
+        "stdint.h": "c",
+        "bsp_motor_encoder.h": "c",
+        "maths.h": "c"
     }
 }
